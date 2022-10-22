@@ -1,0 +1,22 @@
+<div class="container-fluid d-flex justify-content-center align-items-center bg-dark" style="height: 100vh;">
+  <mat-card style="width: 360px;" *ngIf="userName == ''">
+    <mat-card-title class="text-center">Enter your name</mat-card-title>
+    <form [formGroup]="nameForm" (submit)="nameSubmit()">
+      <input type="text" class="mx-4" formControlName="name">
+      <button [disabled]="nameForm.get('name')?.value == ''" mat-raised-button color="accent">Submit</button>
+    </form>
+  </mat-card>
+  <mat-card *ngIf="userName != ''" class="p-0">
+    <div class="container bg-secondary" style="width: 100%;height: 400px;border-radius: 5px;">
+      <div class="message">
+        Username : hello, I am Back!
+      </div>
+    </div>
+    <div class="container p-2">
+      <form>
+        <input type="text" class="mx-4">
+        <button mat-raised-button color="accent">Send</button>
+      </form>
+    </div>
+  </mat-card>
+</div>
