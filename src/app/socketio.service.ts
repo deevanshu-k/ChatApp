@@ -35,4 +35,19 @@ export class SocketioService {
       })
     });
   }
+
+  newMessage() : Observable<any> {
+    return new Observable(observe => {
+      this.socket.on('newmessage',(data) => {
+        observe.next(data);
+      })
+    })
+  }
+
+  message(userName:string,msg : string){
+    this.socket.emit('message',{
+      userName,
+      message:msg
+    })
+  }
 }
