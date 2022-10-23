@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { SocketioService } from './socketio.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class AppComponent {
   });
 
   msgForm = this.fb.group({
-    message: ""
+    message: ['',Validators.required]
   })
 
   constructor(private socketService: SocketioService,
@@ -30,6 +30,7 @@ export class AppComponent {
     this.socketService.setupSocketConnection();
     this.socketService.newUser().subscribe((d) => {
       console.log('New user => ',d);
+      this.addMsg('NEWUSER',`${d.user} Joined the room`)
     });
     this.socketService.newMessage().subscribe((d) => {
       if(this.messages.length > 13){
@@ -52,16 +53,21 @@ export class AppComponent {
     let message = this.msgForm.get('message')?.value;
     console.log(message);
     this.socketService.message(this.userName,String(message));
-    if(this.messages.length > 13){
-      this.messages.splice(0,1);
-    }
-    this.messages.push({
-      userName : this.userName,
-      message: String(message)
-    });
+    this.addMsg(this.userName,String(message));
+    this.msgForm.reset();
   }
 
   ngOnDestroy() {
     this.socketService.disconnect();
+  }
+  
+  addMsg(userName:string,message:string){
+    if(this.messages.length > 13){
+      this.messages.splice(0,1);
+    }
+    this.messages.push({
+      userName,
+      message
+    });
   }
 }

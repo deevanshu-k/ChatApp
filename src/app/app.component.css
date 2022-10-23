@@ -49,6 +49,30 @@
   width: 100%;
 }
 
+.msgleft {
+  padding-right: 400px;
+}
+.msgright {
+  padding-left: 400px;
+}
+
+@media screen and (max-width:1000px) {
+  .msgleft {
+    padding-right: 200px;
+  }
+  .msgright {
+    padding-left: 200px;
+  }
+}
+@media screen and (max-width:450px) {
+  .msgleft {
+    padding-right: 50px;
+  }
+  .msgright {
+    padding-left: 50px;
+  }
+}
+
 .right {
   text-align: right;
 }
