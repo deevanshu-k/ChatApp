@@ -8,7 +8,7 @@ import { SocketioService } from './socketio.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Chat App';
+  title = 'Chat Room';
   userName:string = '';
   messages: {userName:string , message: string}[] = [];
 
