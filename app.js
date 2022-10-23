@@ -10,7 +10,7 @@ const io = require('socket.io')(http, {
 const port = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
-    res.send('<h1>App Running</h1>');
+    res.send('<h1>Backend for ChatApp</h1>');
 });
 
 io.on("connection", (socket) => {
