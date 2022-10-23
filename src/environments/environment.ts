@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  SOCKET_ENDPOINT: 'http://192.168.43.178:3000'
+  SOCKET_ENDPOINT: 'https://evening-reef-11743.herokuapp.com'
 };
 
 /*
