@@ -7,6 +7,8 @@ const io = require('socket.io')(http, {
     }
 });
 
+const port = process.env.PORT || 8080;
+
 app.get('/', (req, res) => {
     res.send('<h1>App Running</h1>');
 });
@@ -35,6 +37,6 @@ io.on("connection", (socket) => {
 
 });
 
-http.listen(process.env.port, () => {
+http.listen(port, () => {
     console.log('Listening on port', process.env.port);
 })
