@@ -3,7 +3,7 @@ const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
     cors: {
-        origin: ['http://192.168.43.178:4200']
+        origin: ['https://deevanshu-k.github.io/ChatApp']
     }
 });
 
