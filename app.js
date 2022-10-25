@@ -16,23 +16,31 @@ const corsOptions = {
 const port = process.env.PORT || 3000;
 
 app.use(cors(corsOptions));
-app.use('/v1',router);
+app.use('/v1', router);
 
 app.get('/', (req, res) => {
     res.send('<h1>Backend for ChatApp</h1>');
 });
 
 io.on("connection", (socket) => {
-    let room1 = '123456789'
+    // let globalRoom = '000000'
     socket.on("join", (data) => {
-        socket.join(room1);
-        io.emit('newuser', data);
+        if (data.room) {
+            socket.join(data.room);
+            io.to(data.room).emit(`${data.room}-newuser`,data);
+        }
+        else {
+            socket.join('globalRoom');
+            io.to('globalRoom').emit('globalRoom-newuser', data);
+        }
+
     });
 
-    socket.on('message',(data) => {
-        let userName = data.userName? data.userName: '';
-        let message = data.message ? data.message: '';
-        socket.broadcast.emit('newmessage',{
+    socket.on('message', (data) => {
+        let userName = data.userName ? data.userName : '';
+        let message = data.message ? data.message : '';
+        let room = data.room ? data.room : 'globalRoom';
+        socket.broadcast.emit(`${room}-newmessage`, {
             userName,
             message
         })
