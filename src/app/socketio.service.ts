@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { io, Socket } from 'socket.io-client';
-import { observable, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +15,10 @@ export class SocketioService {
     this.socket = io(environment.SOCKET_ENDPOINT);
   }
 
-  join(username:string){
+  join(username:string,room?:string){
     let data = {
-      user : username
+      user : username,
+      room
     }
     this.socket.emit('join',data);
   }
@@ -28,26 +29,27 @@ export class SocketioService {
     }
   }
 
-  newUser() : Observable<any> {
+  newUser(room:string='globalRoom') : Observable<any> {
     return new Observable(observe => {
-      this.socket.on('newuser',(data) => {
+      this.socket.on(`${room}-newuser`,(data) => {
         observe.next(data);
       })
     });
   }
 
-  newMessage() : Observable<any> {
+  newMessage(room:string='globalRoom') : Observable<any> {
     return new Observable(observe => {
-      this.socket.on('newmessage',(data) => {
+      this.socket.on(`${room}-newmessage`,(data) => {
         observe.next(data);
       })
     })
   }
 
-  message(userName:string,msg : string){
+  message(userName:string,msg : string,room?:string){
     this.socket.emit('message',{
       userName,
-      message:msg
+      message:msg,
+      room
     })
   }
 }
