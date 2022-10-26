@@ -13,4 +13,12 @@ export class RoomService {
   getAllRooms(){
     return this.http.get(`${environment.SOCKET_ENDPOINT}/v1/api/rooms`);
   }
+
+  getAccess(room:string,password:string,userName:string){
+    return this.http.post(`${environment.SOCKET_ENDPOINT}/v1/api/getRoomAccess`,{
+      room,
+      password,
+      userName
+    })
+  }
 }
