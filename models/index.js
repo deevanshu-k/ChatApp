@@ -11,13 +11,13 @@ rooms.sync({force : true}).then(() => {
         {
             id : Date.now()+1,
             name: 'room2',
-            users: '',
+            users: JSON.stringify([]),
             password : 'room2'
         },
         {
             id : Date.now()+2,
             name: 'room3',
-            users: '',
+            users: JSON.stringify([]),
             password : 'room3'
         },
     ])
