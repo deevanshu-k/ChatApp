@@ -3,7 +3,7 @@
     <mat-card-title class="text-center">Enter Password</mat-card-title>
     <form [formGroup]="passwordForm" (ngSubmit)="passwordSubmit()">
       <input type="password" class="mx-4" formControlName="password">
-      <button mat-raised-button color="accent">Submit</button>
+      <button [disabled]="!this.passwordForm.valid" mat-raised-button color="accent">Submit</button>
     </form>
     <div class="alert alert-danger my-4" *ngIf="passError">
       {{passError}}
