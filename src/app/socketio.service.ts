@@ -15,10 +15,11 @@ export class SocketioService {
     this.socket = io(environment.SOCKET_ENDPOINT);
   }
 
-  join(username:string,room?:string){
+  join(username:string,room?:string,token?:string){
     let data = {
       user : username,
-      room
+      room,
+      token
     }
     this.socket.emit('join',data);
   }
@@ -45,11 +46,26 @@ export class SocketioService {
     })
   }
 
+  unauthorized(room:string) : Observable<any> {
+    return new Observable(observe => {
+      this.socket.on(`${room}-UNAUTHORISED`,(data) => {
+        observe.next(data);
+      })
+    })
+  }
+
   message(userName:string,msg : string,room?:string){
     this.socket.emit('message',{
       userName,
       message:msg,
       room
+    })
+  }
+
+  leaveRoom(room:string,userName:string){
+    this.socket.emit("leave",{
+      room,
+      user : userName
     })
   }
 }
