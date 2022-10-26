@@ -39,7 +39,7 @@ io.on("connection", async (socket) => {
                 }
                 else {
                     socket.join(decodedToken.room);
-                    io.to(decodedToken.room).emit(`${decodedToken.room}-newuser`, data);
+                    socket.to(decodedToken.room).emit(`${decodedToken.room}-newuser`, data);
                     console.log(decodedToken);
                 }
             })
@@ -48,7 +48,7 @@ io.on("connection", async (socket) => {
         else {
             socket.join('globalRoom');
             console.log('UserNAme => ',data.user);
-            io.to('globalRoom').emit('globalRoom-newuser', data);
+            socket.to('globalRoom').emit('globalRoom-newuser', data);
         }
 
     });
