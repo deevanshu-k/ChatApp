@@ -1,21 +1,32 @@
-<div class="msgmain bg-secondary">
-
-    <div class="messages p-2" *ngFor="let element of messages">
-      <div class="message data right msgright" *ngIf="element.userName == userName">
-        {{element.userName}} : {{element.message}}
-      </div>
-      <div class="message data msgleft" *ngIf="element.userName != userName && element.userName != 'NEWUSER'" style="width: 100%;">
-        {{element.userName}} : {{element.message}}
-      </div>
-      <div class="message data text-center" *ngIf="element.userName == 'NEWUSER'" style="width: 100%;">
-        {{element.message}}
-      </div>
-    </div>
-
-  </div>
-  <div class="container p-2">
-    <form [formGroup]="msgForm" (submit)="msgSubmit()">
-      <input type="text" class="mx-1" formControlName="message">
-      <button [disabled]="!this.msgForm.valid" mat-raised-button color="accent">Send</button>
+<div class="tokenForm d-flex justify-content-center align-items-center bg-light" *ngIf="!joined">
+  <mat-card class="usernameCard" style="width: 360px;">
+    <mat-card-title class="text-center">Enter Password</mat-card-title>
+    <form [formGroup]="passwordForm" (ngSubmit)="passwordSubmit()">
+      <input type="password" class="mx-4" formControlName="password">
+      <button mat-raised-button color="accent">Submit</button>
     </form>
+    <div class="alert alert-danger my-4" *ngIf="passError">
+      {{passError}}
+    </div>
+  </mat-card>
+</div>
+<div class="msgmain bg-secondary" *ngIf="joined">
+  <div class="messages p-2" *ngFor="let element of messages">
+    <div class="message data right msgright" *ngIf="element.userName == userName">
+      {{element.userName}} : {{element.message}}
+    </div>
+    <div class="message data msgleft" *ngIf="element.userName != userName && element.userName != 'NEWUSER'"
+      style="width: 100%;">
+      {{element.userName}} : {{element.message}}
+    </div>
+    <div class="message data text-center" *ngIf="element.userName == 'NEWUSER'" style="width: 100%;">
+      {{element.message}}
+    </div>
   </div>
+</div>
+<div class="container p-2" *ngIf="joined">
+  <form [formGroup]="msgForm" (submit)="msgSubmit()">
+    <input type="text" class="mx-1" formControlName="message">
+    <button [disabled]="!this.msgForm.valid" mat-raised-button color="accent">Send</button>
+  </form>
+</div>
