@@ -21,4 +21,11 @@ export class RoomService {
       userName
     })
   }
+
+  createRoom(room:string,password:string){
+    return this.http.post(`${environment.SOCKET_ENDPOINT}/v1/api/createRoom`,{
+      room,
+      password
+    })
+  }
 }
