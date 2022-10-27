@@ -2,7 +2,7 @@
 It is chat room for n-number of users <br>
 High security.
 link : https://deevanshu-k.github.io/ChatApp/
-### v1.0.0
+### B-v2.0.0
 
 ## What's Special
 
