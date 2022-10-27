@@ -7,11 +7,11 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const io = require('socket.io')(http, {
     cors: {
-        origin: ['http://127.0.0.1:4200']  // https://deevanshu-k.github.io
+        origin: [process.env.FRONTEND_ENDPOINT]  // https://deevanshu-k.github.io
     }
 });
 const corsOptions = {
-    origin: 'http://127.0.0.1:4200',
+    origin: process.env.FRONTEND_ENDPOINT,
     optionsSuccessStatus: 200
 };
 
