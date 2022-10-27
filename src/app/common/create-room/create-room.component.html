@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Create Room</h2>
+<mat-dialog-content>
+    <form class="d-flex flex-column" [formGroup]="roomForm">
+        <mat-form-field appearance="fill">
+            <mat-label class="text-white-50">Enter room name</mat-label>
+            <input matInput formControlName="room" placeholder="mush be unique">
+            <mat-error>required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label class="text-white-50">Enter Password</mat-label>
+            <input matInput formControlName="password" placeholder="sefsdf@asdas">
+            <mat-error>min-length 6</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button [disabled]="roomForm.invalid" (click)="roomformSubmit()">Create</button>
+    <button mat-raised-button (click)="Close()">Cancel</button>
+</mat-dialog-actions>

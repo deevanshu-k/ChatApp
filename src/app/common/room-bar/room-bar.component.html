@@ -1,0 +1,6 @@
+<div class="conatiner d-flex flex-column py-4">
+  <button mat-raised-button [routerLinkActive]="'active'" routerLink="/room/{{obj.name}}" class="roombtn bg-dark m-2" *ngFor="let obj of rooms">{{obj.name}}</button>
+  <button mat-raised-button class="roombtn bg-dark m-2" (click)="openDilog()">
+    <mat-icon>add</mat-icon>Create Room
+  </button>
+</div>

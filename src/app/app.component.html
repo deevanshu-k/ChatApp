@@ -6,27 +6,8 @@
       <button [disabled]="nameForm.get('name')?.value == ''" mat-raised-button color="accent">Submit</button>
     </form>
   </mat-card>
-  <mat-card *ngIf="userName != ''" class="p-0">
-    <div class="msgmain bg-secondary">
-
-      <div class="messages p-2" *ngFor="let element of messages">
-        <div class="message data right msgright" *ngIf="element.userName == userName">
-          {{element.userName}} : {{element.message}}
-        </div>
-        <div class="message data msgleft" *ngIf="element.userName != userName && element.userName != 'NEWUSER'" style="width: 100%;">
-          {{element.userName}} : {{element.message}}
-        </div>
-        <div class="message data text-center" *ngIf="element.userName == 'NEWUSER'" style="width: 100%;">
-          {{element.message}}
-        </div>
-      </div>
-
-    </div>
-    <div class="container p-2">
-      <form [formGroup]="msgForm" (submit)="msgSubmit()">
-        <input type="text" class="mx-1" formControlName="message">
-        <button [disabled]="!this.msgForm.valid" mat-raised-button color="accent">Send</button>
-      </form>
-    </div>
+  <mat-card *ngIf="userName != ''" class="d-flex flex-row p-0">
+    <app-room-bar></app-room-bar>
+    <router-outlet></router-outlet>
   </mat-card>
 </div>
