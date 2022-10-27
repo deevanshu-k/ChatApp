@@ -31,7 +31,17 @@ export class RoomBarComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    this.matDilog.open(CreateRoomComponent, dialogConfig);
+    const dialogRef = this.matDilog.open(CreateRoomComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((d:any) => {
+      let room = d.room;
+      let id = d.id;
+      if(room && id){
+        this.rooms.push({
+          id,
+          name :room
+        })
+      }
+    });
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
   selector: 'app-create-room',
@@ -16,7 +17,8 @@ export class CreateRoomComponent implements OnInit {
 
   constructor(
     private matRef:MatDialogRef<CreateRoomComponent>,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private roomServices : RoomService
     ) { }
 
   ngOnInit(): void {
@@ -28,6 +30,19 @@ export class CreateRoomComponent implements OnInit {
 
   roomformSubmit(){
     console.log(this.roomForm);
+    this.roomServices.createRoom(String(this.roomForm.value.room),String(this.roomForm.value.password)).subscribe({
+      next: (d:any) => {
+        this.matRef.close({
+          room : d.data.room,
+          id : d.data.id
+        });
+      },
+      error: (e) => {
+        this.matRef.close();
+        alert('Not able to create room!');
+      },
+      complete: () => {}
+    })
   }
 
 }
