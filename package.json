@@ -4,7 +4,7 @@
   "description": "For socket.io",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Deevanshu kushwah",
@@ -13,6 +13,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.25.3",
     "socket.io": "^4.5.3"
   }
 }
